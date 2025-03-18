@@ -2,7 +2,6 @@ import axios from "axios";
 
 const API_URL = "http://localhost:5000/colors";
 
-// Fetch all colors (with optional filtering)
 export const getColors = async (search?: string) => {
   try {
     const response = await axios.get(API_URL, { params: { search } });
@@ -13,7 +12,6 @@ export const getColors = async (search?: string) => {
   }
 };
 
-// Add a new color
 export const addColor = async (name: string, hex: string) => {
   try {
     const response = await axios.post(API_URL, { name, hex });
@@ -24,7 +22,6 @@ export const addColor = async (name: string, hex: string) => {
   }
 };
 
-// Delete a color by ID
 export const deleteColor = async (id: number) => {
   try {
     await axios.delete(`${API_URL}/${id}`);
