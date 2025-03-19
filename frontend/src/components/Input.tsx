@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { Ref } from "react";
 
 interface InputProps {
   type?: string;
@@ -6,7 +6,7 @@ interface InputProps {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   className?: string;
-  setFocus?: boolean;
+  ref?: Ref<HTMLInputElement>;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -15,19 +15,11 @@ const Input: React.FC<InputProps> = ({
   value,
   onChange,
   className = "",
-  setFocus = false,
+  ref,
 }) => {
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    if (inputRef.current && setFocus) {
-      inputRef.current.focus();
-    }
-  }, []);
-
   return (
     <input
-      ref={inputRef}
+      ref={ref}
       type={type}
       placeholder={placeholder}
       value={value}

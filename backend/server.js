@@ -36,6 +36,7 @@ const startServer = async () => {
 startServer();
 
 app.get("/colors", async (req, res) => {
+  console.log("stefan get");
   const { search } = req.query;
 
   try {

@@ -38,12 +38,17 @@ const ListItem: React.FC<ListItemProps> = ({
       </div>
 
       <Button
-        variant="danger"
         customStyles="ml-4 flex items-center justify-center p-2"
         onClick={() => onDelete(color.id)}
         disabled={isDeleting}
       >
-        <Trash2 className="w-5 h-5" />
+        <motion.div
+          whileHover={{ scale: 1.2, rotate: 10 }}
+          whileTap={{ scale: 0.9, rotate: -10 }}
+          transition={{ duration: 0.2 }}
+        >
+          <Trash2 className="w-5 h-5 cursor-pointer" />
+        </motion.div>
       </Button>
     </motion.li>
   );

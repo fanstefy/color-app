@@ -18,7 +18,7 @@ const AddColorForm = () => {
   const addMutation = useMutation({
     mutationFn: (color: Color) => addColor(color),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["colors"] }); // Refetch color list
+      queryClient.invalidateQueries({ queryKey: ["colors"] });
       setName("");
       setHex("");
     },
@@ -34,22 +34,23 @@ const AddColorForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-3 bg-gray-700 p-4 rounded-lg shadow-md border border-gray-600"
+      className="flex flex-row gap-3 bg-gray-700 p-4 rounded-lg shadow-md border border-gray-600"
     >
       <Input
         placeholder="Color Name"
         value={name}
         onChange={(e) => setName(e.target.value)}
+        className="p-[3px] rounded-[5px]"
       />
       <Input
         placeholder="Hex Code (#FFFFFF)"
         value={hex}
         onChange={(e) => setHex(e.target.value)}
+        className="p-[3px] rounded-[5px]"
       />
       <Button
-        variant="primary"
         type="submit"
-        customStyles="flex items-center justify-center gap-2"
+        customStyles="flex items-center border rounded justify-center gap-2"
       >
         <Plus className="w-5 h-5" />
         Add Color
