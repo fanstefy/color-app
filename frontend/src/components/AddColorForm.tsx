@@ -1,20 +1,33 @@
 import { useState } from "react";
-import { useColorStore } from "../store/colorStore";
-import { Plus } from "lucide-react"; // Add icon
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { addColor } from "../api/colors";
+import { Plus } from "lucide-react";
 import Button from "./Button";
 import Input from "./Input";
+
+interface Color {
+  name: string;
+  hex: string;
+}
 
 const AddColorForm = () => {
   const [name, setName] = useState("");
   const [hex, setHex] = useState("");
-  const { addNewColor } = useColorStore();
+  const queryClient = useQueryClient();
+
+  const addMutation = useMutation({
+    mutationFn: (color: Color) => addColor(color),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["colors"] }); // Refetch color list
+      setName("");
+      setHex("");
+    },
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (name && hex) {
-      addNewColor(name, hex);
-      setName("");
-      setHex("");
+      addMutation.mutate({ name, hex });
     }
   };
 
@@ -33,7 +46,11 @@ const AddColorForm = () => {
         value={hex}
         onChange={(e) => setHex(e.target.value)}
       />
-      <Button type="submit" className="flex items-center justify-center gap-2">
+      <Button
+        variant="primary"
+        type="submit"
+        customStyles="flex items-center justify-center gap-2"
+      >
         <Plus className="w-5 h-5" />
         Add Color
       </Button>

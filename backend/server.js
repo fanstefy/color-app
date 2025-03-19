@@ -1,8 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
-const sequelize = require("./database/db");
 const Color = require("./models/Color");
+const seedDatabase = require("./utils/seedDatabase");
+const sequelize = require("./database/db");
 const { Sequelize } = require("sequelize");
 
 dotenv.config();
@@ -13,18 +14,32 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-sequelize
-  .sync({ force: false })
-  .then(() => console.log("Database connected!"))
-  .catch((err) => console.error("DB connection error:", err));
+const startServer = async () => {
+  try {
+    await sequelize.authenticate();
+    console.log("Database connected successfully");
 
-// Get all colors (with optional filtering by name or hex)
+    await sequelize.sync({ force: false });
+    console.log("Database synced");
+
+    await seedDatabase(); // Seed data only if empty
+    console.log("Seeding completed");
+
+    app.listen(PORT, () => {
+      console.log(`Server running on http://localhost:${PORT}`);
+    });
+  } catch (error) {
+    console.error("Error starting server:", error);
+  }
+};
+
+startServer();
+
 app.get("/colors", async (req, res) => {
   const { search } = req.query;
 
   try {
     let colors;
-
     if (search) {
       colors = await Color.findAll({
         where: {
@@ -44,10 +59,8 @@ app.get("/colors", async (req, res) => {
   }
 });
 
-// Add a new color
 app.post("/colors", async (req, res) => {
   const { name, hex } = req.body;
-
   if (!name || !hex) {
     return res.status(400).json({ message: "Name and hex are required" });
   }
@@ -60,7 +73,6 @@ app.post("/colors", async (req, res) => {
   }
 });
 
-// Delete a color by ID
 app.delete("/colors/:id", async (req, res) => {
   const colorId = req.params.id;
   const color = await Color.findByPk(colorId);
@@ -71,8 +83,4 @@ app.delete("/colors/:id", async (req, res) => {
 
   await color.destroy();
   res.json({ message: "Color deleted" });
-});
-
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
 });
