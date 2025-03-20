@@ -54,5 +54,3 @@ Create .env file in frontend/:
 ### `npm install`
 
 ### `npm run dev`
-
-5️⃣ Access the app:
