@@ -56,5 +56,3 @@ Create .env file in frontend/:
 ### `npm run dev`
 
 5️⃣ Access the app:
-
-### Open http://localhost:5173/ in your browser.
