@@ -3,6 +3,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { fetchColors, deleteColor } from "../api/colors";
 import ListItem from "./ListItem";
 import Button from "./Button";
+import Spinner from "./Spinner";
 
 interface Color {
   id: number;
@@ -25,7 +26,7 @@ const ColorList: React.FC<ColorListProps> = ({ search }) => {
     queryFn: ({ queryKey }) => fetchColors(queryKey[1] as string),
     enabled: !!search,
   });
-  console.log("colors: ", colors);
+
   const deleteMutation = useMutation({
     mutationFn: (id: number) => deleteColor(id),
     onSuccess: () => {
@@ -40,7 +41,7 @@ const ColorList: React.FC<ColorListProps> = ({ search }) => {
       </div>
       <div className="mt-6 max-h-[500px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-800 rounded-lg border border-gray-700">
         {isLoading ? (
-          <p className="text-white text-center">Loading...</p>
+          <Spinner />
         ) : error ? (
           <p className="text-red-400 text-center">Error loading colors.</p>
         ) : colors.length === 0 ? (
