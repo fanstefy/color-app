@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000";
+const API_URL = import.meta.env.VITE_API_URL + "/colors";
 
 export interface Color {
   id: number;
@@ -10,7 +10,7 @@ export interface Color {
 
 export const fetchColors = async (search?: string): Promise<Color[]> => {
   try {
-    const response = await axios.get<Color[]>(API_URL + "/colors", {
+    const response = await axios.get<Color[]>(API_URL, {
       params: search ? { search } : {},
     });
 
@@ -28,7 +28,7 @@ export const fetchColors = async (search?: string): Promise<Color[]> => {
 
 export const addColor = async (color: { name: string; hex: string }) => {
   try {
-    const response = await axios.post(API_URL + "/colors", color);
+    const response = await axios.post(API_URL, color);
     return response.data;
   } catch (error) {
     console.error("Error adding color:", error);
@@ -38,7 +38,7 @@ export const addColor = async (color: { name: string; hex: string }) => {
 
 export const deleteColor = async (id: number) => {
   try {
-    await axios.delete(`${API_URL}/colors/${id}`);
+    await axios.delete(`${API_URL}/${id}`);
   } catch (error) {
     console.error(`Error deleting color with ID ${id}:`, error);
     throw new Error("Failed to delete color. Please try again.");
