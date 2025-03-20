@@ -6,20 +6,20 @@ A React + Typescript + TailwindCSS application to manage colors, allowing users 
 
 ## Features
 
-✅ Add Colors – Users can add a color with a name and a hex code (#FFFFFF format).
-✅ Delete Colors – Remove colors from the list instantly.
-✅ Search Colors – Filter colors dynamically by name or hex code.
-✅ Debounced Search – Efficient searching using lodash debounce.
-✅ Modern UI – Designed with TailwindCSS, featuring a color picker.
-✅ React Query – For API caching and automatic updates.
+✅ Add Colors – Users can add a color with a name and a hex code (#FFFFFF format). \
+✅ Delete Colors – Remove colors from the list instantly. \
+✅ Search Colors – Filter colors dynamically by name or hex code. \
+✅ Debounced Search – Efficient searching using lodash debounce. \
+✅ Modern UI – Designed with TailwindCSS, featuring a color picker. \
+✅ React Query – For API caching and automatic updates. \
 ✅ SQLite Database – Persistent color storage with Sequelize ORM.
 
 ## Tech Stack
 
-Frontend: React + Vite + TypeScript + TailwindCSS
-State Management: React Query
-Backend: Node.js + Express + SQLite (Sequelize ORM)
-API Calls: Axios
+Frontend: React + Vite + TypeScript + TailwindCSS \
+State Management: React Query \
+Backend: Node.js + Express + SQLite (Sequelize ORM) \
+API Calls: Axios \
 UI Components: Lucide Icons, React Color Picker
 
 ## Installation & Setup
