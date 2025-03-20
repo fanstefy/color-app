@@ -7,6 +7,8 @@ interface InputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   className?: string;
   ref?: Ref<HTMLInputElement>;
+  style?: React.CSSProperties;
+  onClick?: () => void;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -16,6 +18,8 @@ const Input: React.FC<InputProps> = ({
   onChange,
   className = "",
   ref,
+  style,
+  onClick,
 }) => {
   return (
     <input
@@ -24,6 +28,8 @@ const Input: React.FC<InputProps> = ({
       placeholder={placeholder}
       value={value}
       onChange={onChange}
+      onClick={onClick}
+      style={style}
       className={`border border-gray-300 outline-none ${className}`}
     />
   );

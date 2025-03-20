@@ -36,7 +36,7 @@ const ColorList: React.FC<ColorListProps> = ({ search }) => {
 
   return (
     <div>
-      <div className="flex justify-center mb-2 mt-4">
+      <div className="flex justify-center mb-2 mt-12">
         <Button onClick={() => refetch()}>Load Colors</Button>
       </div>
       <div className="mt-6 max-h-[500px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-800 rounded-lg border border-gray-700">
@@ -47,7 +47,7 @@ const ColorList: React.FC<ColorListProps> = ({ search }) => {
         ) : colors.length === 0 ? (
           <p className="text-white text-center opacity-80">No colors found.</p>
         ) : (
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-2 scrollbar-thick">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-2 scrollbar-thick mb-24">
             {colors.map((color, index) => (
               <ListItem
                 key={color.id}

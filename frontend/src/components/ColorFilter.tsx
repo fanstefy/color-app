@@ -39,7 +39,7 @@ const ColorFilter: React.FC<ColorFilterProps> = ({ setSearch }) => {
           placeholder="Search colors..."
           value={inputValue}
           onChange={handleInputChange}
-          className="block w-full h-[40px] leading-[50px] outline-none px-[40px] rounded-[10px] border border-black/40"
+          className="block w-full h-[40px] leading-[50px] outline-none px-[40px] rounded-[10px] border border-black/40 italic"
         ></Input>
       </div>
     </div>
