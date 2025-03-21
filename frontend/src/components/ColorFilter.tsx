@@ -26,14 +26,16 @@ const ColorFilter: React.FC<ColorFilterProps> = ({ setSearch }) => {
 
   useEffect(() => {
     if (inputRef.current) {
-      inputRef.current.focus();
+      inputRef.current.focus(); 
     }
   }, []);
 
   return (
     <div className="mb-6">
       <div className="flex gap-3 relative w-[300px] m-auto mt-4 mb-4 rounded-[10px] hover:bg-white/30">
-        <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+        <Search    
+          data-testid="lucide-icon"
+          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
         <Input
           ref={inputRef}
           placeholder="Search colors..."

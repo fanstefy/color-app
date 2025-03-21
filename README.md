@@ -21,6 +21,7 @@ State Management: React Query \
 Backend: Node.js + Express + SQLite (Sequelize ORM) \
 API Calls: Axios \
 UI Components: Lucide Icons, React Color Picker
+Testing: Vitest + React Testing Library
 
 ## Installation & Setup
 
@@ -54,3 +55,7 @@ Create .env file in frontend/:
 ### `npm install`
 
 ### `npm run dev`
+
+## Run Test
+
+### `npm run test`
