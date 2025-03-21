@@ -2,7 +2,6 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const Color = require("./models/Color");
-const seedDatabase = require("./utils/seedDatabase");
 const sequelize = require("./database/db");
 const { Sequelize } = require("sequelize");
 
@@ -19,11 +18,8 @@ const startServer = async () => {
     await sequelize.authenticate();
     console.log("Database connected successfully");
 
-    await sequelize.sync({ force: false });
+    await sequelize.sync({ force: false }); // keeps data if DB exists, creates if not
     console.log("Database synced");
-
-    await seedDatabase(); // Seed data only if empty
-    console.log("Seeding completed");
 
     app.listen(PORT, () => {
       console.log(`Server running on http://localhost:${PORT}`);
@@ -36,7 +32,6 @@ const startServer = async () => {
 startServer();
 
 app.get("/colors", async (req, res) => {
-  console.log("stefan get");
   const { search } = req.query;
 
   try {

@@ -24,7 +24,6 @@ const ColorList: React.FC<ColorListProps> = ({ search }) => {
   } = useQuery<Color[]>({
     queryKey: ["colors", search],
     queryFn: ({ queryKey }) => fetchColors(queryKey[1] as string),
-    enabled: !!search,
   });
 
   const deleteMutation = useMutation({
